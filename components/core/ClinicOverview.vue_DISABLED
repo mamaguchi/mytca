@@ -1,0 +1,455 @@
+<template>
+  <base-material-card
+    class="v-card--material-chart"
+    v-bind="$attrs"
+    v-on="$listeners"
+  >
+    <template v-slot:heading>
+        <div class="display-2 font-weight-light">
+            <v-icon
+              large
+              left
+            >
+              mdi-hospital-building
+            </v-icon>
+            Clinic Overview
+        </div>
+    </template>
+
+    <v-card-text class="text-subtitle-1 font-weight-medium">
+        <v-row no-gutters class="mx-auto">
+            <v-col cols="10" class="text-left mt-4 ml-5">
+            <ValidationProvider v-slot="{ errors }" rules="required|min:1">
+                <v-text-field
+                v-model="clinicName"
+                label="Clinic Name"
+                :error-messages="errors"
+                clear-icon="mdi-close-circle-outline"
+                disabled
+                />
+            </ValidationProvider>
+            </v-col>
+
+            <v-col cols="5" class="text-left ml-5">
+            <ValidationProvider v-slot="{ errors }" rules="required|min:1">
+                <v-text-field
+                v-model="clinicState"
+                label="State"
+                :error-messages="errors"
+                clear-icon="mdi-close-circle-outline"
+                />
+            </ValidationProvider>
+            </v-col>
+
+            <v-col cols="5" class="text-left ml-5">
+            <ValidationProvider v-slot="{ errors }" rules="required|min:1">
+                <v-text-field
+                v-model="clinicDistrict"
+                label="District"
+                :error-messages="errors"
+                clear-icon="mdi-close-circle-outline"
+                />
+            </ValidationProvider>
+            </v-col>
+        </v-row>
+
+        <!--  CLINIC-CLOSE-DAYS  -->
+        <ValidationProvider>
+            <v-row no-gutters class="mx-auto">
+            <v-col cols="10" class="text-left ml-5 mt-2">
+                <label>Clinic is close on</label>
+                <v-treeview
+                v-model="clinicCloseDays"
+                dense
+                selectable
+                :items="daysOfWeek"
+                class="grey--text text--darken-1 ml-16 pl-16 mt-2"
+                />
+            </v-col>
+            </v-row>
+        </ValidationProvider>
+
+        <!--  CLINIC-PUBLIC-HOLIDAY  -->
+        <ValidationProvider>
+            <v-row no-gutters class="mx-auto">
+            <v-col cols="10" class="d-flex flex-column text-left ml-5 mt-2">
+                <label>Public holiday</label>
+                <v-date-picker
+                v-model="clinicPubHol"
+                class="mt-1 ml-12"
+                no-title
+                multiple
+                :show-current="false"
+                @click:date="dateClick"
+                />
+            </v-col>
+            </v-row>
+        </ValidationProvider>
+
+        <!--  CLINIC-STAFF  -->
+        <v-form
+            v-model="addNewStaffInputValid"
+        >
+            <v-row
+            class="pa-4"
+            justify="space-between"
+            >
+            <v-col cols="5" class="d-flex flex-column">
+                <label>Register new staff</label>
+
+                <v-text-field
+                v-model="newStaffName"
+                class="mt-2"
+                label="Name"
+                outlined
+                flat
+                clearable
+                :rules="nameRules"
+                @click="newStaffStatusHint.msg=''"
+                @click:clear="newStaffStatusHint.msg=''"
+                />
+
+                <v-text-field
+                v-model="newStaffId"
+                class="mt-n10"
+                label="ID/IC number"
+                outlined
+                flat
+                clearable
+                :rules="idRules"
+                persistent-hint
+                :hint="newStaffStatusHint.msg"
+                @click="newStaffStatusHint.msg=''"
+                @click:clear="newStaffStatusHint.msg=''"
+                />
+
+                <!-- eslint-disable-next-line  -->
+                <v-spacer></v-spacer>
+
+                <v-row justify="center" align="end">
+                <v-btn
+                    :disabled="!addNewStaffInputValid"
+                    class="font-weight-medium grey--text text--darken-2"
+                    @click="addStaffToClinic(
+                    newStaffStatusHint
+                    )"
+                >
+                    <v-icon left>
+                    mdi-account-plus
+                    </v-icon>
+                    Register
+                </v-btn>
+                </v-row>
+            </v-col>
+
+            <v-divider vertical />
+
+            <!--  CLINIC-STAFF--CONTEXT-VIEW  -->
+            <v-col>
+                <label class="ml-4">Existing staff</label>
+
+                <v-text-field
+                v-model="searchClinicStaffToDel"
+                class="mt-2 ml-4"
+                label="Filter"
+                outlined
+                flat
+                hide-details
+                clearable
+                />
+
+                <v-virtual-scroll
+                :items="clinicStaff"
+                :item-height="1000"
+                height="250"
+                class="ml-n2 mt-2"
+                >
+                <template v-slot="{ item }">
+                    <v-list-item>
+                    <v-list-item-content>
+                        <v-treeview
+                        v-model="clinicStaffToDel"
+                        :items="item"
+                        activatable
+                        :active.sync="activeClinicStaff"
+                        :search="searchClinicStaffToDel"
+                        open-all
+                        dense
+                        selectable
+                        transition
+                        class="grey--text text--darken-1"
+                        >
+                        <!-- eslint-disable-next-line  -->
+                    <template v-slot:prepend="{ item }">
+                            <v-icon v-if="!item.children">
+                            mdi-account
+                            </v-icon>
+                        </template>
+                        </v-treeview>
+                    </v-list-item-content>
+                    </v-list-item>
+                </template>
+                </v-virtual-scroll>
+
+                <v-row justify="center">
+                <v-btn
+                    :disabled="clinicStaffToDel.length === 0"
+                    class="font-weight-medium grey--text text--darken-2 mt-5"
+                    @click="delStaffFrmClinic"
+                >
+                    <v-icon left>
+                    mdi-delete
+                    </v-icon>
+                    Delete
+                </v-btn>
+                </v-row>
+            </v-col>
+            </v-row>
+        </v-form>
+
+        <v-row no-gutters>
+            <v-col cols="20">
+            <v-divider />
+            </v-col>
+        </v-row>
+    </v-card-text>    
+
+    <template v-slot:actions>
+        <v-row no-gutters justify="center">
+            <v-btn
+            :disabled="(!dirty &&
+                !clinicHasAddedStaff.bool &&
+                !clinicHasDeletedStaff.bool) ||
+                invalid"
+            text
+            class="font-weight-medium grey--text text--darken-2 mt-n5 mb-n1"
+            @click="saveClinicDataToDirectory(clinicName)"
+            >
+            <v-icon left>
+                mdi-content-save
+            </v-icon>
+            Save
+            </v-btn>
+        </v-row>
+    </template>
+
+  </base-material-card>
+</template>
+
+<script>
+import MaterialCard from '@/components/base/MaterialCard'
+
+export default {
+  name: 'MaterialChartCard',
+
+  components: {
+    BaseMaterialCard: MaterialCard
+  },
+
+  inheritAttrs: false,
+
+  data () {
+      return {
+          daysOfWeek: [
+            {
+            id: 0,
+            name: 'Sunday'
+            },
+            {
+            id: 1,
+            name: 'Monday'
+            },
+            {
+            id: 2,
+            name: 'Tuesday'
+            },
+            {
+            id: 3,
+            name: 'Wednesday'
+            },
+            {
+            id: 4,
+            name: 'Thursday'
+            },
+            {
+            id: 5,
+            name: 'Friday'
+            },
+            {
+            id: 6,
+            name: 'Saturday'
+            }
+          ],
+          nameRules: [
+            v => !!v || 'Name is required'
+          ],
+          idRules: [
+            v => !!v || 'ID is required'
+          ]
+      }
+  },
+
+  methods: {
+      dateClick (date) {
+      // Do nothing for now
+      },
+      addStaffToClinic (statusHint) {
+      const existingStaff = this.clinicStaff[0][0].children
+      for (let j = 0; j < existingStaff.length; j++) {
+        if (existingStaff[j].id === this.newStaffId) {
+          statusHint.msg = 'This staff is already registered in the clinic!'
+          return
+        }
+      }
+      statusHint.msg = `${this.newStaffName} added to the clinic`
+
+      const newStaff = {
+        id: this.newStaffId,
+        name: this.newStaffName
+      }
+      existingStaff.push(newStaff)
+      if (!this.clinicHasAddedStaff.bool) {
+        this.clinicHasAddedStaff.bool = true
+      }
+      existingStaff.sort((a, b) => a.name > b.name)
+      this.activeClinicStaff.push(this.newStaffId)
+    },
+    delStaffFrmClinic () {
+      if (this.clinicStaffToDel.length === 0) {
+        return
+      }
+      const staffIdToDelArr = [...this.clinicStaffToDel]
+      const staffArr = this.clinicStaff[0][0].children
+      for (let i = 0; i < staffIdToDelArr.length; i++) {
+        for (let j = 0; j < staffArr.length; j++) {
+          if (staffArr[j].id === staffIdToDelArr[i]) {
+            staffArr.splice(j, 1)
+            if (!this.clinicHasDeletedStaff.bool) {
+              this.clinicHasDeletedStaff.bool = true
+            }
+            break
+          }
+        }
+      }
+    }
+  },
+
+  props: {
+      clinicName: {
+          type: String,
+          default: undefined
+      },
+      clinicState: {
+          type: String,
+          default: undefined
+      },
+      clinicDistrict: {
+          type: String,
+          default: undefined
+      },
+      clinicCloseDays: {
+          type: Array,
+          default: () => ([])
+      },
+      clinicPubHol: {
+          type: Array,
+          default: () => ([])
+      },
+      addNewStaffInputValid: {
+          type: Boolean,
+          default: undefined
+      },
+      newStaffName: {
+          type: String,
+          default: undefined
+      },
+      newStaffStatusHint: {
+          type: Object,
+          default: () => ({})
+      },
+      newStaffId: {
+          type: String,
+          default: undefined
+      },
+      searchClinicStaffToDel: {
+          type: String,
+          default: undefined
+      },
+      clinicStaff: {
+          type: Array,
+          default: () => ([])
+      },
+      clinicStaffToDel: {
+          type: Array,
+          default: () => ([])
+      },
+      activeClinicStaff: {
+          type: Array,
+          default: () => ([])
+      },
+      clinicHasAddedStaff: {
+          type: Object,
+          default: () => ({})
+      },
+      clinicHasDeletedStaff: {
+          type: Object,
+          default: () => ({})
+      },
+
+    data: {
+      type: Object,
+      default: () => ({})
+    },
+    eventHandlers: {
+      type: Array,
+      default: () => ([])
+    },
+    options: {
+      type: Object,
+      default: () => ({})
+    },
+    ratio: {
+      type: String,
+      default: undefined
+    },
+    responsiveOptions: {
+      type: Array,
+      default: () => ([])
+    },
+    type: {
+      type: String,
+      required: true,
+      validator: v => ['Bar', 'Line', 'Pie'].includes(v)
+    }
+  }
+}
+</script>
+
+<style lang="sass">
+  .v-card--material-chart
+    p
+      color: #999
+
+    .v-card--material__heading
+      max-height: 185px
+
+      .ct-label
+        color: inherit
+        opacity: .7
+        font-size: 0.975rem
+        font-weight: 100
+
+      .ct-grid
+        stroke: rgba(255, 255, 255, 0.2)
+
+      .ct-series-a .ct-point,
+      .ct-series-a .ct-line,
+      .ct-series-a .ct-bar,
+      .ct-series-a .ct-slice-donut
+          stroke: rgba(255,255,255,.8)
+
+      .ct-series-a .ct-slice-pie,
+      .ct-series-a .ct-area
+          fill: rgba(255,255,255,.4)
+</style>
+

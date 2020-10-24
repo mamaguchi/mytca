@@ -7,221 +7,9 @@
     <v-row class="px-4">
       <v-col
         cols="12"
-        lg="4"
-        class="my-10"
-      >
-        <base-material-chart-card
-          :data="emailsSubscriptionChart.data"
-          :options="emailsSubscriptionChart.options"
-          :responsive-options="emailsSubscriptionChart.responsiveOptions"
-          color="#E91E63"
-          hover-reveal
-          type="Bar"
-        >
-          <template v-slot:reveal-actions>
-            <v-tooltip bottom>
-              <template v-slot:activator="{ attrs, on }">
-                <v-btn
-                  v-bind="attrs"
-                  color="info"
-                  icon
-                  v-on="on"
-                >
-                  <v-icon
-                    color="info"
-                  >
-                    mdi-refresh
-                  </v-icon>
-                </v-btn>
-              </template>
-
-              <span>Refresh</span>
-            </v-tooltip>
-
-            <v-tooltip bottom>
-              <template v-slot:activator="{ attrs, on }">
-                <v-btn
-                  v-bind="attrs"
-                  light
-                  icon
-                  v-on="on"
-                >
-                  <v-icon>mdi-pencil</v-icon>
-                </v-btn>
-              </template>
-
-              <span>Change Date</span>
-            </v-tooltip>
-          </template>
-
-          <h4 class="card-title font-weight-light mt-2 ml-2">
-            Website Views
-          </h4>
-
-          <p class="d-inline-flex font-weight-light ml-2 mt-1">
-            Last Campaign Performance
-          </p>
-
-          <template v-slot:actions>
-            <v-icon
-              class="mr-1"
-              small
-            >
-              mdi-clock-outline
-            </v-icon>
-            <span class="caption grey--text font-weight-light">updated 10 minutes ago</span>
-          </template>
-        </base-material-chart-card>
-      </v-col>
-
-      <v-col
-        cols="12"
-        lg="4"
-        class="my-10"
-      >
-        <base-material-chart-card
-          :data="dailySalesChart.data"
-          :options="dailySalesChart.options"
-          color="success"
-          hover-reveal
-          type="Line"
-        >
-          <template v-slot:reveal-actions>
-            <v-tooltip bottom>
-              <template v-slot:activator="{ attrs, on }">
-                <v-btn
-                  v-bind="attrs"
-                  color="info"
-                  icon
-                  v-on="on"
-                >
-                  <v-icon
-                    color="info"
-                  >
-                    mdi-refresh
-                  </v-icon>
-                </v-btn>
-              </template>
-
-              <span>Refresh</span>
-            </v-tooltip>
-
-            <v-tooltip bottom>
-              <template v-slot:activator="{ attrs, on }">
-                <v-btn
-                  v-bind="attrs"
-                  light
-                  icon
-                  v-on="on"
-                >
-                  <v-icon>mdi-pencil</v-icon>
-                </v-btn>
-              </template>
-
-              <span>Change Date</span>
-            </v-tooltip>
-          </template>
-
-          <h4 class="card-title font-weight-light mt-2 ml-2">
-            Daily Sales
-          </h4>
-
-          <p class="d-inline-flex font-weight-light ml-2 mt-1">
-            <v-icon
-              color="green"
-              small
-            >
-              mdi-arrow-up
-            </v-icon>
-            <span class="green--text">55%</span>&nbsp;
-            increase in today's sales
-          </p>
-
-          <template v-slot:actions>
-            <v-icon
-              class="mr-1"
-              small
-            >
-              mdi-clock-outline
-            </v-icon>
-            <span class="caption grey--text font-weight-light">updated 4 minutes ago</span>
-          </template>
-        </base-material-chart-card>
-      </v-col>
-
-      <v-col
-        cols="12"
-        lg="4"
-        class="my-10"
-      >
-        <base-material-chart-card
-          :data="dataCompletedTasksChart.data"
-          :options="dataCompletedTasksChart.options"
-          hover-reveal
-          color="info"
-          type="Line"
-        >
-          <template v-slot:reveal-actions>
-            <v-tooltip bottom>
-              <template v-slot:activator="{ attrs, on }">
-                <v-btn
-                  v-bind="attrs"
-                  color="info"
-                  icon
-                  v-on="on"
-                >
-                  <v-icon
-                    color="info"
-                  >
-                    mdi-refresh
-                  </v-icon>
-                </v-btn>
-              </template>
-
-              <span>Refresh</span>
-            </v-tooltip>
-
-            <v-tooltip bottom>
-              <template v-slot:activator="{ attrs, on }">
-                <v-btn
-                  v-bind="attrs"
-                  light
-                  icon
-                  v-on="on"
-                >
-                  <v-icon>mdi-pencil</v-icon>
-                </v-btn>
-              </template>
-
-              <span>Change Date</span>
-            </v-tooltip>
-          </template>
-
-          <h3 class="card-title font-weight-light mt-2 ml-2">
-            Completed Tasks
-          </h3>
-
-          <p class="d-inline-flex font-weight-light ml-2 mt-1">
-            Last Last Campaign Performance
-          </p>
-
-          <template v-slot:actions>
-            <v-icon
-              class="mr-1"
-              small
-            >
-              mdi-clock-outline
-            </v-icon>
-            <span class="caption grey--text font-weight-light">campaign sent 26 minutes ago</span>
-          </template>
-        </base-material-chart-card>
-      </v-col>
-
-      <v-col
-        cols="12"
         sm="6"
         lg="3"
-        class="my-3"
+        class="my-10"
       >
         <base-material-stats-card
           color="info"
@@ -237,7 +25,7 @@
         cols="12"
         sm="6"
         lg="3"
-        class="my-3"
+        class="my-10"
       >
         <base-material-stats-card
           color="primary"
@@ -253,7 +41,7 @@
         cols="12"
         sm="6"
         lg="3"
-        class="my-3"
+        class="my-10"
       >
         <base-material-stats-card
           color="success"
@@ -269,7 +57,7 @@
         cols="12"
         sm="6"
         lg="3"
-        class="my-3"
+        class="my-10"
       >
         <base-material-stats-card
           color="orange"
@@ -293,18 +81,94 @@
         >
           <template v-slot:heading>
             <div class="display-2 font-weight-light">
-              Employees Stats
+              Clinic Stats
             </div>
 
             <div class="subtitle-1 font-weight-light">
-              New employees on 15th September, 2016
+              Available clinics in your region
             </div>
           </template>
           <v-card-text>
             <v-data-table
               :headers="headers"
-              :items="items"
-            />
+              :items="clinicNames"
+              sort-by="name"
+            >
+              <template v-slot:top>
+                <v-toolbar flat color="white">
+                  <!-- <v-toolbar-title>My CRUD</v-toolbar-title>
+                  <v-divider
+                    class="mx-4"
+                    inset
+                    vertical
+                  /> -->
+                  <v-spacer />
+                  <v-btn
+                    color="success"
+                    dark
+                    class="mb-2 mr-1"
+                    @click="updateClinics"
+                  >
+                    Save
+                  </v-btn>
+
+                  <v-dialog v-model="dialog" max-width="500px" @keydown.enter="save">
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        color="primary"
+                        dark
+                        class="mb-2"
+                        v-bind="attrs"
+                        v-on="on"
+                      >
+                        New Clinic
+                      </v-btn>
+                    </template>
+                    <v-card>
+                      <v-card-title>
+                        <span class="headline">{{ formTitle }}</span>
+                      </v-card-title>
+
+                      <v-card-text>
+                        <v-container>
+                          <v-row>
+                            <v-col cols="12" sm="6" md="4">
+                              <v-text-field v-model="editedItem.name" autofocus label="Name" />
+                            </v-col>
+                          </v-row>
+                        </v-container>
+                      </v-card-text>
+
+                      <v-card-actions>
+                        <v-spacer />
+                        <v-btn color="blue darken-1" text @click="close">
+                          Cancel
+                        </v-btn>
+                        <v-btn color="blue darken-1" text @click="save">
+                          Done
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
+                </v-toolbar>
+              </template>
+
+              <template v-slot:[`item.actions`]="{ item }">
+                <v-icon
+                  small
+                  class="mr-2"
+                  @click="editItem(item)"
+                >
+                  mdi-pencil
+                </v-icon>
+                <v-icon
+                  small
+                  @click="deleteItem(item)"
+                >
+                  mdi-delete
+                </v-icon>
+              </template>
+            </v-data-table>
           </v-card-text>
         </base-material-card>
       </v-col>
@@ -355,7 +219,88 @@
               :key="n"
             >
               <v-card-text>
-                <template v-for="(task, i) in tasks[tabs]">
+                <v-data-table
+                  :headers="headers"
+                  :items="clinicNames"
+                  sort-by="name"
+                >
+                  <template v-slot:top>
+                    <v-toolbar flat color="white">
+                      <!-- <v-toolbar-title>My CRUD</v-toolbar-title>
+                      <v-divider
+                        class="mx-4"
+                        inset
+                        vertical
+                      /> -->
+                      <v-spacer />
+                      <v-btn
+                        color="success"
+                        dark
+                        class="mb-2 mr-1"
+                        @click="updateClinics"
+                      >
+                        Save
+                      </v-btn>
+
+                      <v-dialog v-model="dialog" max-width="500px" @keydown.enter="save">
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-btn
+                            color="primary"
+                            dark
+                            class="mb-2"
+                            v-bind="attrs"
+                            v-on="on"
+                          >
+                            New Clinic
+                          </v-btn>
+                        </template>
+                        <v-card>
+                          <v-card-title>
+                            <span class="headline">{{ formTitle }}</span>
+                          </v-card-title>
+
+                          <v-card-text>
+                            <v-container>
+                              <v-row>
+                                <v-col cols="12" sm="6" md="4">
+                                  <v-text-field v-model="editedItem.name" autofocus label="Name" />
+                                </v-col>
+                              </v-row>
+                            </v-container>
+                          </v-card-text>
+
+                          <v-card-actions>
+                            <v-spacer />
+                            <v-btn color="blue darken-1" text @click="close">
+                              Cancel
+                            </v-btn>
+                            <v-btn color="blue darken-1" text @click="save">
+                              Done
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-dialog>
+                    </v-toolbar>
+                  </template>
+
+                  <template v-slot:[`item.actions`]="{ item }">
+                    <v-icon
+                      small
+                      class="mr-2"
+                      @click="editItem(item)"
+                    >
+                      mdi-pencil
+                    </v-icon>
+                    <v-icon
+                      small
+                      @click="deleteItem(item)"
+                    >
+                      mdi-delete
+                    </v-icon>
+                  </template>
+                </v-data-table>
+
+                <!-- <template v-for="(task, i) in tasks[tabs]">
                   <v-row
                     :key="i"
                     align="center"
@@ -391,7 +336,7 @@
                       </v-icon>
                     </v-col>
                   </v-row>
-                </template>
+                </template> -->
               </v-card-text>
             </v-tab-item>
           </v-tabs-items>
@@ -402,17 +347,34 @@
 </template>
 
 <script>
+// import MaterialChartCard from '@/components/base/MaterialChartCard'
 import MaterialCard from '@/components/base/MaterialCard'
-import MaterialChartCard from '@/components/base/MaterialChartCard'
 import MaterialStatsCard from '@/components/base/MaterialStatsCard'
 
 export default {
   // name: 'DashboardDashboard',
 
   components: {
+    // BaseMaterialChartCard: MaterialChartCard,
     BaseMaterialCard: MaterialCard,
-    BaseMaterialChartCard: MaterialChartCard,
     BaseMaterialStatsCard: MaterialStatsCard
+  },
+
+  async asyncData (context) {
+    const { data } = await context.$axios.get('http://localhost:8080/pkdadm')
+    const clinicNames = data.clinicNames.map((val, idx) => {
+      return {
+        id: data.clinicIds[idx],
+        name: val
+      }
+    })
+
+    return {
+      jknName: data.jknName,
+      pkdName: data.pkdName,
+      pkdAdmId: data.pkdAdmId,
+      clinicNames
+    }
   },
 
   data () {
@@ -492,70 +454,57 @@ export default {
         ]
       },
       headers: [
+        // {
+        //   sortable: false,
+        //   text: 'ID',
+        //   value: 'id'
+        // },
         {
-          sortable: false,
-          text: 'ID',
-          value: 'id'
-        },
-        {
-          sortable: false,
+          sortable: true,
           text: 'Name',
           value: 'name'
         },
         {
           sortable: false,
-          text: 'Salary',
-          value: 'salary',
-          align: 'right'
-        },
-        {
-          sortable: false,
-          text: 'Country',
-          value: 'country',
-          align: 'right'
-        },
-        {
-          sortable: false,
-          text: 'City',
-          value: 'city',
-          align: 'right'
+          text: 'Actions',
+          value: 'actions'
         }
       ],
+      dialog: false,
+      editedIndex: -1,
+      editedItem: {
+        name: ''
+      },
+      defaultItem: {
+        name: ''
+      },
+      newClinicNames: [],
+      newClinicNamesIdx: -1,
+      editedClinicNames: [],
+      editedClinicNamesIdx: -1,
+      delClinicNames: [],
+      delClinicNamesIdx: -1,
+      isNewClinic: -1,
       items: [
         {
           id: 1,
-          name: 'Dakota Rice',
-          country: 'Niger',
-          city: 'Oud-Tunrhout',
-          salary: '$35,738'
+          name: 'Dakota Rice'
         },
         {
           id: 2,
-          name: 'Minerva Hooper',
-          country: 'Curaçao',
-          city: 'Sinaai-Waas',
-          salary: '$23,738'
+          name: 'Minerva Hooper'
         },
         {
           id: 3,
-          name: 'Sage Rodriguez',
-          country: 'Netherlands',
-          city: 'Overland Park',
-          salary: '$56,142'
+          name: 'Sage Rodriguez'
         },
         {
           id: 4,
-          name: 'Philip Chanley',
-          country: 'Korea, South',
-          city: 'Gloucester',
-          salary: '$38,735'
+          name: 'Philip Chanley'
         },
         {
           id: 5,
-          name: 'Doris Greene',
-          country: 'Malawi',
-          city: 'Feldkirchen in Kārnten',
-          salary: '$63,542'
+          name: 'Doris Greene'
         }
       ],
       tabs: 0,
@@ -611,9 +560,107 @@ export default {
     }
   },
 
+  computed: {
+    formTitle () {
+      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+    }
+  },
+
   methods: {
     complete (index) {
       this.list[index] = !this.list[index]
+    },
+
+    updateClinics () {
+      const output = {}
+
+      output.jknName = this.jknName
+      output.pkdName = this.pkdName
+      output.pkdAdmId = this.pkdAdmId
+      output.addMetadatas = this.newClinicNames
+      output.editMetadatas = this.editedClinicNames
+      output.delMetadatas = this.delClinicNames
+
+      const data = JSON.stringify(output)
+      // eslint-disable-next-line
+      console.log(output)
+      // eslint-disable-next-line
+      console.log(data)
+      this.$axios.post('http://localhost:8081/updateclinicbypkdadm', data)
+        .then((response) => {
+          alert('saveClinicDataToDirectory done successfully!')
+          this.newClinicNames = []
+          this.editedClinicNames = []
+          this.delClinicNames = []
+        }, (response) => {
+          alert('saveClinicDataToDirectory failed!')
+        })
+    },
+
+    editItem (item) {
+      this.editedIndex = this.clinicNames.indexOf(item)
+      // this.editedClinicNamesIdx = this.editedClinicNames.indexOf(item)
+      this.editedClinicNamesIdx = this.editedClinicNames.findIndex(
+        i => i.name === item.name)
+      this.isNewClinic = this.newClinicNames.findIndex(
+        i => i.name === item.name)
+      this.editedItem = Object.assign({}, item)
+      this.dialog = true
+    },
+
+    deleteItem (item) {
+      const index = this.clinicNames.indexOf(item)
+
+      if (confirm('Are you sure you want to remove this clinic?')) {
+        this.clinicNames.splice(index, 1)
+
+        const editedClinicIdx = this.editedClinicNames.findIndex(
+          i => i.name === item.name)
+        if (editedClinicIdx > -1) {
+          this.editedClinicNames.splice(editedClinicIdx, 1)
+        }
+
+        const newClinicIdx = this.newClinicNames.findIndex(
+          i => i.name === item.name)
+        if (newClinicIdx > -1) {
+          // Remove newly added clinic in memory
+          this.newClinicNames.splice(newClinicIdx, 1)
+        } else {
+          // Remove existing clinic in directory
+          this.delClinicNames.push(item)
+        }
+      }
+    },
+
+    close () {
+      this.dialog = false
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+      })
+    },
+
+    save () {
+      if (this.editedIndex > -1) {
+        if (this.clinicNames[this.editedIndex].name === this.editedItem.name) {
+          this.close()
+          return
+        }
+        Object.assign(this.clinicNames[this.editedIndex], this.editedItem)
+        if (this.editedClinicNamesIdx > -1) {
+          // The item has been edited before
+          Object.assign(this.editedClinicNames[this.editedClinicNamesIdx], this.editedItem)
+        } else if (!(this.isNewClinic > -1)) {
+          // The item is edited for the first time
+          this.editedClinicNames.push(this.editedItem)
+        }
+      } else if (this.editedItem.name === '') {
+        // Do nothing
+      } else {
+        this.clinicNames.push(this.editedItem)
+        this.newClinicNames.push(this.editedItem)
+      }
+      this.close()
     }
   }
 }

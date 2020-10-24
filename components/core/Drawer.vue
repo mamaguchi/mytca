@@ -125,29 +125,14 @@ export default {
         to: '/user'
       },
       {
-        title: 'rtables',
-        icon: 'mdi-clipboard-outline',
-        to: '/tables/regular-tables'
+        icon: 'mdi-account',
+        title: 'clinic admin',
+        to: '/clinicadmin'
       },
       {
-        title: 'typography',
-        icon: 'mdi-format-font',
-        to: '/components/typography'
-      },
-      {
-        title: 'icons',
-        icon: 'mdi-chart-bubble',
-        to: '/components/icons'
-      },
-      {
-        title: 'google',
-        icon: 'mdi-map-marker',
-        to: '/maps/google-maps'
-      },
-      {
-        title: 'notifications',
-        icon: 'mdi-bell',
-        to: '/components/notifications'
+        icon: 'mdi-account',
+        title: 'public',
+        to: '/public'
       }
     ]
   }),

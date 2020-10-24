@@ -29,3 +29,19 @@ export default {
   })
 }
 </script>
+
+<style>
+
+body > div {
+    display: none;
+}
+
+body > footer#dashboard-core-footer {
+    display: none;
+}
+
+body > div#__nuxt {
+    display: block;
+}
+
+</style>
